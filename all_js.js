@@ -2,16 +2,16 @@
 //Date: 27/11/2018, 
 //Desc: Takes a csv of dates and vals as converts to a heatmap calendar representation.
 
-//var prism_str = (document).getElementById("prism_data").innerHTML;
+function calendarShow(prism_str, element, column){
 
-function calendarShow(prism_str){
-    //var prism_str = $("#prism_data").data("pr_dat");
     var prism = JSON.parse(prism_str);
-
-
-    var str_date = [];	                     			//Holds Date value - used for parsing date
-    var date_var = "Date,Var\n";                      	//csv string holding data in the form that time.js needs
-    var min=9999, max=0, counter;
+    var str_date = [];	                     			            //Holds Date value - used for parsing date
+    var date_var = "Date,Var\n";                      	            //csv string holding data in the form that time.js needs
+    var min=9999, max=0, counter, count_blank=0;
+    var first_data_pt = new Date(prism[0].data[1].value.slice(0, 4) + "-" + prism[0].data[1].value.slice(4, 6) + "-" + prism[0].data[1].value.slice(6));
+    if(prism[0].length < column || column <= 0){
+        alert("Please select a valid column to inspect.")
+    }
 
     prism.forEach(function(rows){
 
@@ -30,23 +30,58 @@ function calendarShow(prism_str){
         
         str_var = rows.data[4].value;                    			//Gets the varience value
 
-        if(str_var === "-100"){counter++;}
-        else if(str_var !== "-100"){counter = 0;}
-        if(counter >= 3){ str_var = ""; }
+        // if(str_var === "-100"){counter++;}
+        // else if(str_var !== "-100"){counter = 0;}
+        // if(counter >= 3){ str_var = ""; }
+
+        //
+        //Removing the years with no data
+
+        var last_data_pt = new Date(year, 11, 31);
+        var current_date = new Date(year, month-1, day);
+                
+        const utc1 = Date.UTC(first_data_pt.getFullYear(), first_data_pt.getMonth(), first_data_pt.getDate());
+        const utc2 = Date.UTC(last_data_pt.getFullYear(), last_data_pt.getMonth(), last_data_pt.getDate());
+        var data_days = Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24))+1;
+        
+        console.log("Year: ", new Date(year).getFullYear(), " firstDay: ", first_data_pt.getFullYear(), " Year !== firstDay: ", new Date(year).getFullYear() !== first_data_pt.getFullYear());
+        console.log("first_data_pt " + first_data_pt + "  last_data_pt " + last_data_pt +  " days till year end: " + data_days);
+
+        if(str_var === "" && new Date(year).getFullYear() === first_data_pt.getFullYear()){
+            count_blank += 1;
+            console.log(count_blank);
+        }
+        if(new Date(year).getFullYear() !== first_data_pt.getFullYear()){
+            first_data_pt = current_date;
+        }
+
+        if(count_blank == data_days){
+            count_blank = 0;
+            min ++;
+        }
+
+        //End of Removing the years with no data
+        //
         
 
         if(str_var === ""){ date_var += undefined + "\n"; }
         else{ date_var += Math.round(str_var) + "\n"; } 
+
+        var color = rows.data[4].color;
+
     });
+
     var csv = d3.csv.parse(date_var, function(item) { return item; });	//Parses the var to csv format
 
-    formCalendar(min, max, date_var, csv);
+    //console.log("Data: " + date_var);
+
+    formCalendar(min, max, date_var, csv, element);
 }
 
 
 //Heatmap Calendar by Kathy Zhou source: http://bl.ocks.org/KathyZ/c2d4694c953419e0509b
 
-function formCalendar(min, max, date_var, csv){
+function formCalendar(min, max, date_var, csv, element){
 
     var width = 960,
             height = 750,
@@ -68,7 +103,7 @@ function formCalendar(min, max, date_var, csv){
         .domain([-.05, .05])
         .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
 
-    var svg = d3.select("#chart").selectAll("svg")
+    var svg = d3.select(element).selectAll("svg")
         .data(d3.range(min, max+1))
         .enter().append("svg")
         .attr("width", width)
