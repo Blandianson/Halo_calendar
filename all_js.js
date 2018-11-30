@@ -6,12 +6,14 @@ function calendarShow(prism_str, element, column){
 
     var prism = JSON.parse(prism_str);
     var str_date = [];	                     			            //Holds Date value - used for parsing date
-    var date_var = "Date,Var\n";                      	            //csv string holding data in the form that time.js needs
+    var date_var = "Date,Var\n", date_var_col = [];                      	            //csv string holding data in the form that time.js needs
     var min=9999, max=0, counter, count_blank=0;
     var first_data_pt = new Date(prism[0].data[1].value.slice(0, 4) + "-" + prism[0].data[1].value.slice(4, 6) + "-" + prism[0].data[1].value.slice(6));
-    if(prism[0].length < column || column <= 0){
+    if(prism[0].data.length-1 < column || column <= 1){
         alert("Please select a valid column to inspect.")
+        return;
     }
+    var unique_color = [];
 
     prism.forEach(function(rows){
 
@@ -28,7 +30,7 @@ function calendarShow(prism_str, element, column){
             else if( int_year > max ){ max = int_year; }
         }
         
-        str_var = rows.data[4].value;                    			//Gets the varience value
+        str_var = rows.data[column].value;                    			//Gets the varience value
 
         // if(str_var === "-100"){counter++;}
         // else if(str_var !== "-100"){counter = 0;}
@@ -43,13 +45,9 @@ function calendarShow(prism_str, element, column){
         const utc1 = Date.UTC(first_data_pt.getFullYear(), first_data_pt.getMonth(), first_data_pt.getDate());
         const utc2 = Date.UTC(last_data_pt.getFullYear(), last_data_pt.getMonth(), last_data_pt.getDate());
         var data_days = Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24))+1;
-        
-        console.log("Year: ", new Date(year).getFullYear(), " firstDay: ", first_data_pt.getFullYear(), " Year !== firstDay: ", new Date(year).getFullYear() !== first_data_pt.getFullYear());
-        console.log("first_data_pt " + first_data_pt + "  last_data_pt " + last_data_pt +  " days till year end: " + data_days);
 
         if(str_var === "" && new Date(year).getFullYear() === first_data_pt.getFullYear()){
             count_blank += 1;
-            console.log(count_blank);
         }
         if(new Date(year).getFullYear() !== first_data_pt.getFullYear()){
             first_data_pt = current_date;
@@ -68,13 +66,17 @@ function calendarShow(prism_str, element, column){
         else{ date_var += Math.round(str_var) + "\n"; } 
 
         var color = rows.data[4].color;
+        date_var_col.push([year + "-" + month + "-" + day, str_var, color]);
+        console.log("Colour: ", color);
+
+        // if(unique_color.includes(color) === false){
+        //     unique_color.push(color);
+        //     console.log(color);
+        // }
 
     });
 
     var csv = d3.csv.parse(date_var, function(item) { return item; });	//Parses the var to csv format
-
-    //console.log("Data: " + date_var);
-
     formCalendar(min, max, date_var, csv, element);
 }
 
@@ -99,9 +101,19 @@ function formCalendar(min, max, date_var, csv, element){
         percent = d3.format(".1%"),
         format = d3.time.format("%Y-%m-%d");
 
+    // var color = d3.scale.quantize()
+    //     .domain([-.05, .05])
+    //     .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+
+    //
+    //Changing colors to Halo Colors
+
     var color = d3.scale.quantize()
-        .domain([-.05, .05])
-        .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
+         .domain([-.05, .05])
+         .range(d3.range(36).map(function(d) { return "q" + d + "-11"; }));
+
+    //End Color change
+    //
 
     var svg = d3.select(element).selectAll("svg")
         .data(d3.range(min, max+1))
@@ -179,7 +191,7 @@ function formCalendar(min, max, date_var, csv, element){
         return d in data;
     })
     .attr("class", function(d) {
-        return "day " + color((data[d])/40);				//Divides the data so heatmap colours aren't too extreme.
+        return "day " + color((data[d])/20);				//Divides the data so heatmap colours aren't too extreme.
     })
     .select("title")
     .text(function(d) {
