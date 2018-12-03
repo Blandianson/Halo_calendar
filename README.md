@@ -74,7 +74,7 @@ Halo BI v18 or above.
 
 Dataset with Day-Level granularity.
 
-Dataset with the hierachy and  of:
+Dataset with the hierachy of:
 
 
 var prism = "pane": {"rows": [ { "data": [
