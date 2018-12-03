@@ -18,7 +18,7 @@ This is the Pane Edit interface. Paste the following code into the HTML text are
 
 
 ------HTML------
-
+```
 <!DOCTYPE html>
 
     <head>
@@ -38,7 +38,7 @@ This is the Pane Edit interface. Paste the following code into the HTML text are
     </body>
     
 </html>
-
+```
 
 ------HTML END------
 
@@ -48,7 +48,7 @@ and between the App Script tags in the Javascript text area paste:
 
 ------SCRIPT------
 
-
+```
 $.getScript("http://localhost/halo/Public/all_js.js",function(){
 
     var columnMeasureValue = 4; 		//change to the no of the column of interest (usually 4)
@@ -56,7 +56,7 @@ $.getScript("http://localhost/halo/Public/all_js.js",function(){
     calendarShow(JSON.stringify(prism.pane.rows), "#chart", columnMeasureValue);
     
 });
-
+```
 
 ------SCRIPT END------
 
@@ -76,7 +76,7 @@ Dataset with Day-Level granularity.
 
 Dataset with the hierachy of:
 
-
+```
 var prism = "pane": {"rows": [ { "data": [
 
 				{
@@ -118,7 +118,7 @@ var prism = "pane": {"rows": [ { "data": [
 			"selected": false
 			
 		},
-
+```
 ## Installing
 
 Once you click "Run" you should see a calendar populated with colours within the view.
