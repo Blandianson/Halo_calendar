@@ -7,8 +7,7 @@ The Heatmap calendar takes a json of dates, percentage values, and color values 
 These instructions are applicable only to users of the Halo Business Intelligency Web Application.
 
 Select a view from the Halo Web App interface to add the pane to and then add a pane. 
-From the dropdown menu in the top right of the pane select Edit and for the column of interest change the RenderStyle to "KPI" then in
-KPI properties, Style, change to Background Color scales.
+From the dropdown menu in the top right of the pane select **Edit** and for the column of interest change the **RenderStyle** to **KPI** then in **KPI properties** > **Style** > change to **Background Color scales**.
 Then select the spanner icon from the bottom right once the data has loaded.
 This is the Pane Edit interface. Paste the following code into the HTML text area:
 
@@ -51,7 +50,7 @@ $.getScript("http://localhost/halo/Public/all_js.js",function(){
 
 Script must be run in the same file as the json data being passed to the calendarShow function (prism).
 
-Click the "Run" button in the above the HTML text area, and click the blue "Done" button in the bottom left.
+Click the **Run** button in the above the HTML text area, and click the blue **Done** button in the bottom left.
 
 DOn't forget to save the view - click the floppy-disk icon in the toolbar top right.
 
@@ -92,7 +91,7 @@ var prism = "pane": {
 ```
 ## Installing
 
-Once you click "Run" you should see a calendar populated with colours within the view.
+Once you click **Run** you should see a calendar populated with colours within the view.
 
 Add other panes from the left hand menu to see the corresponding data in the calendar.
 
