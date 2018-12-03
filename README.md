@@ -7,13 +7,9 @@ The Heatmap calendar takes a json of dates, percentage values, and color values 
 These instructions are applicable only to users of the Halo Business Intelligency Web Application.
 
 Select a view from the Halo Web App interface to add the pane to and then add a pane. 
-
 From the dropdown menu in the top right of the pane select Edit and for the column of interest change the RenderStyle to "KPI" then in
-
 KPI properties, Style, change to Background Color scales.
-
 Then select the spanner icon from the bottom right once the data has loaded.
-
 This is the Pane Edit interface. Paste the following code into the HTML text area:
 
 
