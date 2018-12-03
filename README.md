@@ -70,5 +70,5 @@ var prism = "pane": {"rows": [ { "data": [
 Once you click "Run" you should see a calendar populated with colours within the view.
 Add other panes from the left hand menu to see the corresponding data in the calendar.
 
-# Authors
+## Authors
 Nicole Jackson - Halo
