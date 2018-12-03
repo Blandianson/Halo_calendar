@@ -126,6 +126,13 @@ Once you click "Run" you should see a calendar populated with colours within the
 Add other panes from the left hand menu to see the corresponding data in the calendar.
 
 
+## Acknowledgements
+
+Based heavily on the works of Kathy Zhou and her Calender View Heatmap:
+
+http://bl.ocks.org/KathyZ/c2d4694c953419e0509b
+
+
 ## Authors
 
 Nicole Jackson - Halo
