@@ -2,7 +2,7 @@
 
 The Heatmap calendar takes a json of dates, percentage values, and color values and maps them to a calendar using colour and colour intensity to represent the values.
 
-# Getting Started
+## Getting Started
 These instructions are applicable only to users of the Halo Business Intelligency Web Application.
 Select a view from the Halo Web App interface to add the pane to and then add a pane. 
 From the dropdown menu in the top right of the pane select Edit and for the column of interest change the RenderStyle to "KPI" then in KPI properties, Style, change to Background Color scales.
@@ -39,7 +39,7 @@ Script must be run in the same file as the json data being passed to the calenda
 Click the "Run" button in the above the HTML text area, and click the blue "Done" button in the bottom left.
 DOn't forget to save the view - click the floppy-disk icon in the toolbar top right.
 
-# Prerequisites
+## Prerequisites
 Halo BI v18 or above.
 Dataset with Day-Level granularity.
 Dataset with the hierachy and  of:
@@ -66,7 +66,7 @@ var prism = "pane": {"rows": [ { "data": [
 			"selected": false
 		},
 
-# Installing
+## Installing
 Once you click "Run" you should see a calendar populated with colours within the view.
 Add other panes from the left hand menu to see the corresponding data in the calendar.
 
