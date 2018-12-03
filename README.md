@@ -20,23 +20,18 @@ This is the Pane Edit interface. Paste the following code into the HTML text are
 ------HTML------
 ```
 <!DOCTYPE html>
-
-    <head>
+    <head>   
     
         <link rel="stylesheet" type="text/css" href="http://localhost/halo/Public/calFormat.css">
-	
         <script src="http://d3js.org/d3.v3.js"></script>
-	
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	
     </head>
-    
     <body>
     
         <div id="chart" class="clearfix"></div>
 	
     </body>
-    
 </html>
 ```
 
@@ -74,46 +69,29 @@ Dataset with Day-Level granularity.
 Dataset with the hierachy of:
 
 ```
-var prism = "pane": {"rows": [ { "data": [
+var prism = "pane": {
+		"rows": [ { 
+			"data": [
 
 				{
-				
 					"value": "not used",
-					
 					"id": "0"
-					
 				},
-				
 				{
-				
 					"value": "20160102"           //must have
-					
 				},
-				
 				{
-				
 					"value": "1054"
-					
 				},
-				
 				{
-				
 					"value": "1392"
-					
 				},
-				
 				{
-				
 					"value": "-24.2816091954023", //must have
-					
 					"color": "#FF0000"            //must have
-					
 				}
-				
 			],
-			
 			"selected": false
-			
 		},
 ```
 ## Installing
