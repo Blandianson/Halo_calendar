@@ -13,7 +13,6 @@ Then select the spanner icon from the bottom right once the data has loaded.
 This is the Pane Edit interface. Paste the following code into the HTML text area:
 
 
-------HTML------
 ```
 <!DOCTYPE html>
     <head>   
@@ -31,13 +30,11 @@ This is the Pane Edit interface. Paste the following code into the HTML text are
 </html>
 ```
 
-------HTML END------
 
 
 and between the App Script tags in the Javascript text area paste:
 
 
-------SCRIPT------
 
 ```
 $.getScript("http://localhost/halo/Public/halobi.app.kpiCalendar.js",function(){
@@ -46,7 +43,6 @@ $.getScript("http://localhost/halo/Public/halobi.app.kpiCalendar.js",function(){
 });
 ```
 
-------SCRIPT END------
 
 
 Click the **Run** button in the above the HTML text area, and click the blue **Done** button in the bottom left.
