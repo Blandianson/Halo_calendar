@@ -17,7 +17,7 @@ This is the Pane Edit interface. Paste the following code into the HTML text are
 <!DOCTYPE html>
     <head>   
     
-        <link rel="stylesheet" type="text/css" href="http://localhost/halo/Public/calFormat.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost/halo/Public/halobi.app.kpiCalendar.css">
         <script src="http://d3js.org/d3.v3.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	
@@ -39,7 +39,7 @@ and between the App Script tags in the Javascript text area paste:
 ------SCRIPT------
 
 ```
-$.getScript("http://localhost/halo/Public/all_js.js",function(){
+$.getScript("http://localhost/halo/Public/halobi.app.kpiCalendar.js",function(){
     var columnMeasureValue = 4; 		//change to the no of the column of interest (usually 4)
     calendarShow(JSON.stringify(prism.pane.rows), "#chart", columnMeasureValue);
 });
