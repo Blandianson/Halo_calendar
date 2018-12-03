@@ -29,7 +29,7 @@ and between the App Script tags in the Javascript text area paste:
 ------SCRIPT------
 
 $.getScript("http://localhost/halo/Public/all_js.js",function(){
-    var columnMeasureValue = 4; //use 4
+    var columnMeasureValue = 4; 		//change to the no of the column of interest (usually 4)
     calendarShow(JSON.stringify(prism.pane.rows), "#chart", columnMeasureValue);
 });
 
@@ -37,16 +37,14 @@ $.getScript("http://localhost/halo/Public/all_js.js",function(){
 
 Script must be run in the same file as the json data being passed to the calendarShow function (prism).
 Click the "Run" button in the above the HTML text area, and click the blue "Done" button in the bottom left.
-DOn't forget to save the view - click the floppydisk icon in the toolbar top right.
+DOn't forget to save the view - click the floppy-disk icon in the toolbar top right.
 
 # Prerequisites
 Halo BI v18 or above.
-Dataset with Day level granularity.
-Dataset with the hierachy of:
+Dataset with Day-Level granularity.
+Dataset with the hierachy and  of:
 
-var prism = "pane": {"rows": [
-		{
-			"data": [
+var prism = "pane": {"rows": [ { "data": [
 				{
 					"value": "not used",
 					"id": "0"
