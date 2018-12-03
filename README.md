@@ -50,11 +50,8 @@ and between the App Script tags in the Javascript text area paste:
 
 ```
 $.getScript("http://localhost/halo/Public/all_js.js",function(){
-
     var columnMeasureValue = 4; 		//change to the no of the column of interest (usually 4)
-    
     calendarShow(JSON.stringify(prism.pane.rows), "#chart", columnMeasureValue);
-    
 });
 ```
 
