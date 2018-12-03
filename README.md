@@ -1,7 +1,5 @@
 # Halo_calendar
 
-Script must be run in the same file as the json data being passed to the calendarShow function (prism).
-
 The Heatmap calendar takes a a csv of dates and percentage values and maps them to a calendar using colour and colour intensity to represent the values.
 
 #Getting Started
@@ -36,7 +34,9 @@ $.getScript("http://localhost/halo/Public/all_js.js",function(){
 });
 
 ------SCRIPT END------
-Click the "Run" button in the ubove the HTML text area, and click the blue "Done" button in the bottom left.
+
+Script must be run in the same file as the json data being passed to the calendarShow function (prism).
+Click the "Run" button in the above the HTML text area, and click the blue "Done" button in the bottom left.
 DOn't forget to save the view - click the floppydisk icon in the toolbar top right.
 
 ##Prerequisites
