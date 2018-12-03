@@ -1,12 +1,12 @@
 //Author: Nicole Jackson, 
-//Date: 27/11/2018, 
+//Date: 3/12/2018, 
 //Desc: Takes a csv of dates and vals as converts to a heatmap calendar representation.
 
 function calendarShow(prism_str, element, column){
 
     var prism = JSON.parse(prism_str);
     var str_date = [];	                     			            //Holds Date value - used for parsing date
-    var date_var = "Date,Var\n", date_var_col = [];                      	            //csv string holding data in the form that time.js needs
+    var date_var = "Date,Var\n", date_var_col = [];                 //csv string holding data in the form that time.js needs
     var min=9999, max=0, counter, count_blank=0;
     var first_data_pt = new Date(prism[0].data[1].value.slice(0, 4) + "-" + prism[0].data[1].value.slice(4, 6) + "-" + prism[0].data[1].value.slice(6));
     if(prism[0].data.length-1 < column || column <= 1){
@@ -30,14 +30,11 @@ function calendarShow(prism_str, element, column){
             else if( int_year > max ){ max = int_year; }
         }
         
-        str_var = rows.data[column].value;                    			//Gets the varience value
+        str_var = rows.data[column].value;                    		//Gets the varience value
 
-        // if(str_var === "-100"){counter++;}
+        // if(str_var === "-100"){counter++;}                       //Blanks out the erroneous -100 values (correct or not)
         // else if(str_var !== "-100"){counter = 0;}
         // if(counter >= 3){ str_var = ""; }
-
-        //
-        //Removing the years with no data
 
         var last_data_pt = new Date(year, 11, 31);
         var current_date = new Date(year, month-1, day);
@@ -56,34 +53,23 @@ function calendarShow(prism_str, element, column){
         if(count_blank == data_days){
             count_blank = 0;
             min ++;
-        }
-
-        //End of Removing the years with no data
-        //
-        
+        }        
 
         if(str_var === ""){ date_var += undefined + "\n"; }
         else{ date_var += Math.round(str_var) + "\n"; } 
 
         var color = rows.data[4].color;
         date_var_col.push([year + "-" + month + "-" + day, str_var, color]);
-        console.log("Colour: ", color);
-
-        // if(unique_color.includes(color) === false){
-        //     unique_color.push(color);
-        //     console.log(color);
-        // }
 
     });
-
     var csv = d3.csv.parse(date_var, function(item) { return item; });	//Parses the var to csv format
-    formCalendar(min, max, date_var, csv, element);
+    formCalendar(min, max, date_var, csv, element, date_var_col);
 }
 
 
 //Heatmap Calendar by Kathy Zhou source: http://bl.ocks.org/KathyZ/c2d4694c953419e0509b
 
-function formCalendar(min, max, date_var, csv, element){
+function formCalendar(min, max, date_var, csv, element, date_var_col){
 
     var width = 960,
             height = 750,
@@ -100,20 +86,6 @@ function formCalendar(min, max, date_var, csv, element){
         year = d3.time.format("%Y"),
         percent = d3.format(".1%"),
         format = d3.time.format("%Y-%m-%d");
-
-    // var color = d3.scale.quantize()
-    //     .domain([-.05, .05])
-    //     .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
-
-    //
-    //Changing colors to Halo Colors
-
-    var color = d3.scale.quantize()
-         .domain([-.05, .05])
-         .range(d3.range(36).map(function(d) { return "q" + d + "-11"; }));
-
-    //End Color change
-    //
 
     var svg = d3.select(element).selectAll("svg")
         .data(d3.range(min, max+1))
@@ -178,6 +150,8 @@ function formCalendar(min, max, date_var, csv, element){
         .style("visibility", "hidden")
         .text("a simple tooltip");
 
+    var count_color = 0;
+
     var data = d3.nest()
     .key(function(d) {
         return d.Date;
@@ -190,8 +164,10 @@ function formCalendar(min, max, date_var, csv, element){
     rect.filter(function(d) {
         return d in data;
     })
-    .attr("class", function(d) {
-        return "day " + color((data[d])/20);				//Divides the data so heatmap colours aren't too extreme.
+    .attr("style", function(d) {
+        var col = date_var_col[count_color][2];
+        count_color++;
+        return "fill:" + col;
     })
     .select("title")
     .text(function(d) {
