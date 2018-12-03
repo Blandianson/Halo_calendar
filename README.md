@@ -62,11 +62,11 @@ DOn't forget to save the view - click the floppy-disk icon in the toolbar top ri
 
 ## Prerequisites
 
-Halo BI v18 or above.
+- Halo BI v18 or above.
 
-Dataset with Day-Level granularity.
+- Dataset with Day-Level granularity.
 
-Dataset with the hierachy of:
+- Dataset with the hierachy of:
 
 ```
 var prism = "pane": {
