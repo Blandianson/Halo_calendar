@@ -103,9 +103,7 @@ Add other panes from the left hand menu to see the corresponding data in the cal
 
 ## Acknowledgements
 
-Based heavily on the works of Kathy Zhou and her Calender View Heatmap:
-
-http://bl.ocks.org/KathyZ/c2d4694c953419e0509b
+Based heavily on the works of Kathy Zhou and her [Calender View Heatmap](http://bl.ocks.org/KathyZ/c2d4694c953419e0509b).
 
 
 ## Authors
